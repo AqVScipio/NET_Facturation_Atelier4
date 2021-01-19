@@ -640,3 +640,5 @@ C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\obj\De
 C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\obj\Debug\net5.0\service-worker-assets.js
 C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\obj\Debug\net5.0\RazorDeclaration\Pages\Detail.razor.g.cs
 C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\obj\Debug\net5.0\Razor\Pages\Detail.razor.g.cs
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\obj\Debug\net5.0\RazorDeclaration\Pages\CreerFacture.razor.g.cs
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\obj\Debug\net5.0\Razor\Pages\CreerFacture.razor.g.cs

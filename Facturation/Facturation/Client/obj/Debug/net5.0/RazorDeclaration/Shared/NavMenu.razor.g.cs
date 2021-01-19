@@ -97,7 +97,7 @@ using Facturation.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 23 "C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\Shared\NavMenu.razor"
+#line 28 "C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

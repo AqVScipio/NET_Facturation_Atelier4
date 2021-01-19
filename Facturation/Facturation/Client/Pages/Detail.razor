@@ -4,43 +4,51 @@
 
 @inject HttpClient http
 @inject FactureRef fRef
+@inject NavigationManager nav
 
 
 <h3>Detail</h3>
 
 @if (fac != null)
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Numéro</th>
-                <th>Client</th>
-                <th>Echeance</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@fac.Numero</td>
-                <td>@fac.Client</td>
+    <EditForm Model="@fac" OnValidSubmit="@HandleSubmit">
 
-                @if (Facture.NbDaysRemaining(fac.DateReglement) <= Facture.DEADLINE_ALERT)
-                {
-                    <td>@fac.DateReglement.ToShortDateString() - <span style="color:red;">@DeadlineToNbDaysRemaining(fac.DateReglement)</span></td>
-                }
-                else if (Facture.NbDaysRemaining(fac.DateReglement) <= Facture.DEADLINE_WARNING)
-                {
-                    <td>@fac.DateReglement.ToShortDateString() - <span style="color:orange;">@DeadlineToNbDaysRemaining(fac.DateReglement)</span></td>
-                }
-                else
-                {
-                    <td>@fac.DateReglement.ToShortDateString() - <span>@DeadlineToNbDaysRemaining(fac.DateReglement)</span></td>
-                }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Client</th>
+                    <th>Echeance</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><InputText @bind-Value="fac.Numero" /></td>
+                    <td><InputText @bind-Value="fac.Client" /></td>
 
-                <td>@fac.MontantRegle / @fac.Montant € (@(fac.Montant - fac.MontantRegle) € restant dû)</td>
-            </tr>
-        </tbody>
-    </table>
+                    @if (Facture.NbDaysRemaining(fac.DateReglement) <= Facture.DEADLINE_ALERT)
+                    {
+                        <td><InputDate @bind-Value="fac.DateReglement" min="@fac.DateReglement" /> - <span style="color:red;">@DeadlineToNbDaysRemaining(fac.DateReglement)</span></td>
+                    }
+                    else if (Facture.NbDaysRemaining(fac.DateReglement) <= Facture.DEADLINE_WARNING)
+                    {
+                        <td><InputDate @bind-Value="fac.DateReglement" min="@DateTime.Now.ToInputDate()" /> - <span style="color:orange;">@DeadlineToNbDaysRemaining(fac.DateReglement)</span></td>
+                    }
+                    else
+                    {
+                        <td><InputDate @bind-Value="fac.DateReglement" min="@DateTime.Now.ToInputDate()" /> - <span>@DeadlineToNbDaysRemaining(fac.DateReglement)</span></td>
+                    }
+
+                    <td><InputNumber @bind-Value="fac.MontantRegle" /> / <InputNumber @bind-Value="fac.Montant" /> € (@(fac.Montant - fac.MontantRegle) € restant dû)</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Sauver les modifications</button>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+    </EditForm>
+
 }
 
 @code {
@@ -54,5 +62,11 @@
     private string DeadlineToNbDaysRemaining(DateTime date)
     {
         return (int)Math.Truncate((date - DateTime.Now).TotalDays) + " jours restants.";
+    }
+
+    private async Task HandleSubmit()
+    {
+        var response = await http.PostAsJsonAsync("api/factures/edit", fac);
+        nav.NavigateTo("factures");
     }
 }

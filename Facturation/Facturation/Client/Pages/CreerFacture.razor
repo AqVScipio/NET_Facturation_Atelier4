@@ -1,0 +1,51 @@
+﻿@page "/creer"
+
+@using Facturation.Shared
+
+@inject HttpClient http
+@inject NavigationManager nav
+
+
+<h3>Créer une Facture</h3>
+
+<EditForm Model="@fac" OnValidSubmit="@HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <p>
+        <label>
+            Numero :
+            <InputText @bind-Value="fac.Numero" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Client :
+            <InputText @bind-Value="fac.Client" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Date de règlement attendue:
+            <InputDate @bind-Value="fac.DateReglement" min="@DateTime.Now.ToInputDate()" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Montant :
+            <InputNumber @bind-Value="fac.Montant" />
+        </label>
+    </p>
+
+    <button type="submit">Créer</button>
+</EditForm>
+
+@code {
+    private Facture fac = new Facture() { MontantRegle = 0, DateReglement = DateTime.Now };
+
+    private async Task HandleSubmit()
+    {
+        var response = await http.PostAsJsonAsync("api/factures", fac);
+        nav.NavigateTo("factures");
+    }
+}

@@ -61,5 +61,18 @@ namespace Facturation.Server.Controllers
                 return BadRequest("Facture non valide");
             }
         }
+        [HttpPost("edit")]
+        public ActionResult<Facture> EditerFacture([FromBody] Facture nouvelleFacture)
+        {
+            if (ModelState.IsValid)
+            {
+                _data.Edit(nouvelleFacture);
+                return nouvelleFacture;
+            }
+            else
+            {
+                return BadRequest("Facture non valide");
+            }
+        }
     }
 }

@@ -22,5 +22,18 @@ namespace Facturation.Server.Controllers
         [HttpGet]
         public DashboardDto GetDashboard() => 
             new DashboardDto(_data);
+
+        [HttpPost]
+        public ActionResult<DashboardDto> GetDashboard([FromBody] DashboardResearch research)
+        {
+            if (ModelState.IsValid)
+            {
+                return new DashboardDto(_data.GetFactures(research.DateMin, research.DateMax));
+            }
+            else
+            {
+                return BadRequest("Facture non valide");
+            }
+        }
     }
 }

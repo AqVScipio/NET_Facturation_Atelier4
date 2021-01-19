@@ -24,18 +24,22 @@ namespace Facturation.Server.Models
 
         public decimal CA 
             => cnct.QueryFirst<decimal>("select sum(f.Montant) from Factures f");
+        public decimal Percu
+            => cnct.QueryFirst<decimal>("select sum(f.MontantRegle) from Factures f");
 
         public void Add(Facture facture)
-        {
-            throw new NotImplementedException();
-        }
+            => cnct.Execute("insert into Factures values (@Numero, @Client, @DateReglement, @Montant, @MontantRegle)", facture);
+
+        public void Edit(Facture facture)
+            => cnct.Execute("update Factures set Numero = @Numero, Client = @Client, DateReglement = @DateReglement, " +
+                "Montant = @Montant, MontantRegle = @MontantRegle where Id = @Id", facture);
 
         public IEnumerable<Facture> GetFactures(DateTime? debut, DateTime? fin)
         {
             string sql = "select * from Factures f ";
             if(debut != null)
             {
-                if(fin != null)
+                if(fin != null && fin > debut)
                     sql += string.Format("where DateReglement between {0} and {1}", debut.Value.ToShortDateString(), fin.Value.ToShortDateString());
                 else
                     sql += string.Format("where DateReglement >= {0}", debut.Value.ToShortDateString());

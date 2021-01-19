@@ -11,6 +11,17 @@
 else
 {
     <h2>CA : <strong>@dashboard.CA €</strong></h2>
+    <h3>Perçu : <strong>@dashboard.Percu €</strong> - Restant à recouvrir : <strong>@(dashboard.CA - dashboard.Percu) €</strong></h3>
+
+    <EditForm Model="@research" OnValidSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <h5>Sélectionner la période : </h5>
+        <p>
+            Entre <InputDate @bind-Value="research.DateMin" /> et <InputDate @bind-Value="research.DateMax" />
+            <button type="submit">Go</button>
+        </p>
+    </EditForm>
     <table class="table">
         <thead>
             <tr>
@@ -32,10 +43,17 @@ else
 
 @code {
     private DashboardDto dashboard;
+    private DashboardResearch research = new DashboardResearch();
 
     protected override async Task OnInitializedAsync()
     {
         dashboard = await Http.GetFromJsonAsync<DashboardDto>("api/dashboard");
     }
 
+    private async Task HandleSubmit()
+    {
+        //var response = await Http.PostAsJsonAsync("api/dashboard", research);
+        //dashboard = response.Content.ReadFromJsonAsync<DashboardDto>().Result;
+        //StateHasChanged();
+    }
 }

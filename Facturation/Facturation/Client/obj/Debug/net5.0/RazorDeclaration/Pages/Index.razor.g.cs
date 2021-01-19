@@ -98,15 +98,22 @@ using Facturation.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 33 "C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\Pages\Index.razor"
+#line 44 "C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\Pages\Index.razor"
        
     private DashboardDto dashboard;
+    private DashboardResearch research = new DashboardResearch();
 
     protected override async Task OnInitializedAsync()
     {
         dashboard = await Http.GetFromJsonAsync<DashboardDto>("api/dashboard");
     }
 
+    private async Task HandleSubmit()
+    {
+        var response = await Http.PostAsJsonAsync("api/dashboard", research);
+        dashboard = await response.Content.ReadFromJsonAsync<DashboardDto>().Result;
+        StateHasChanged();
+    }
 
 #line default
 #line hidden

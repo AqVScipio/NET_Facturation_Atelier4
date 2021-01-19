@@ -19,6 +19,8 @@ namespace Facturation.Shared
 
         public decimal CA => Factures.Sum(f => f.Montant);
 
+        public decimal Percu => throw new NotImplementedException();
+
         public IEnumerable<Facture> GetFactures(DateTime? debut, DateTime? fin) =>
             Factures.Where(f => 
                 (!debut.HasValue || f.DateReglement >= debut) && 
@@ -31,6 +33,11 @@ namespace Facturation.Shared
         }
 
         public IEnumerable<Facture> GetFactures(string orderBy, string asc)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Facture facture)
         {
             throw new NotImplementedException();
         }

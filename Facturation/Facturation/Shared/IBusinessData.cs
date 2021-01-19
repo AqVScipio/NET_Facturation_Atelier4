@@ -10,8 +10,10 @@ namespace Facturation.Shared
         IEnumerable<Facture> Factures { get; }
 
         decimal CA { get; }
+        decimal Percu { get; }
 
         void Add(Facture facture);
+        void Edit(Facture facture);
 
         IEnumerable<Facture> GetFactures(DateTime? debut, DateTime? fin);
         IEnumerable<Facture> GetFactures(string orderBy, string asc);

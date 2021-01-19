@@ -98,7 +98,7 @@ using Facturation.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 46 "C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\Pages\Detail.razor"
+#line 54 "C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Client\Pages\Detail.razor"
        
     private Facture fac = null;
 
@@ -112,9 +112,16 @@ using Facturation.Shared;
         return (int)Math.Truncate((date - DateTime.Now).TotalDays) + " jours restants.";
     }
 
+    private async Task HandleSubmit()
+    {
+        var response = await http.PostAsJsonAsync("api/factures/edit", fac);
+        nav.NavigateTo("factures");
+    }
+
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager nav { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private FactureRef fRef { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient http { get; set; }
     }
