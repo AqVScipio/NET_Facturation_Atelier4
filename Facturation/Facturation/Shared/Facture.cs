@@ -17,8 +17,13 @@ namespace Facturation.Shared
         public string Client { get; set; }
         [Required]
         public DateTime DateReglement { get; set; }
+
+
         [Required]
         [Range(0.1, double.MaxValue)]
         public decimal Montant { get; set; }
+        [Required]
+        [Range(0.1, double.MaxValue)]
+        public decimal MontantRegle { get; set; }
     }
 }

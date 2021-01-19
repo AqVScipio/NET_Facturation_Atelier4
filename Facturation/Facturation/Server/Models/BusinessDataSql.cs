@@ -20,9 +20,10 @@ namespace Facturation.Server.Models
         }
 
         public IEnumerable<Facture> Factures
-            => cnct.Query<Facture>("SELECT * FROM Factures ORDER BY DateReglement DESC");
+            => cnct.Query<Facture>("SELECT * FROM Factures");
 
-        public decimal CA => throw new NotImplementedException();
+        public decimal CA 
+            => cnct.QueryFirst<decimal>("select sum(f.Montant) from Factures f");
 
         public void Add(Facture facture)
         {
@@ -31,7 +32,19 @@ namespace Facturation.Server.Models
 
         public IEnumerable<Facture> GetFactures(DateTime? debut, DateTime? fin)
         {
-            throw new NotImplementedException();
+            string sql = "select * from Factures f ";
+            if(debut != null)
+            {
+                if(fin != null)
+                    sql += string.Format("where DateReglement between {0} and {1}", debut.Value.ToShortDateString(), fin.Value.ToShortDateString());
+                else
+                    sql += string.Format("where DateReglement >= {0}", debut.Value.ToShortDateString());
+            }
+            else
+                if (fin != null)
+                    sql += string.Format("where DateReglement <= {0}", fin.Value.ToShortDateString());
+
+            return cnct.Query<Facture>(sql);
         }
     }
 }

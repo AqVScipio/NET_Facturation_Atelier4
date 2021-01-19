@@ -1,0 +1,12 @@
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\bin\Debug\net5.0\Facturation.Shared.deps.json
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\bin\Debug\net5.0\Facturation.Shared.dll
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\bin\Debug\net5.0\ref\Facturation.Shared.dll
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\bin\Debug\net5.0\Facturation.Shared.pdb
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\obj\Debug\net5.0\Facturation.Shared.csprojAssemblyReference.cache
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\obj\Debug\net5.0\Facturation.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\obj\Debug\net5.0\Facturation.Shared.AssemblyInfoInputs.cache
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\obj\Debug\net5.0\Facturation.Shared.AssemblyInfo.cs
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\obj\Debug\net5.0\Facturation.Shared.csproj.CoreCompileInputs.cache
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\obj\Debug\net5.0\Facturation.Shared.dll
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\obj\Debug\net5.0\ref\Facturation.Shared.dll
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Shared\obj\Debug\net5.0\Facturation.Shared.pdb
