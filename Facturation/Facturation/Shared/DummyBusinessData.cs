@@ -29,5 +29,10 @@ namespace Facturation.Shared
         {
             (Factures as List<Facture>).Add(facture);
         }
+
+        public IEnumerable<Facture> GetFactures(string orderBy, string asc)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -46,6 +46,12 @@ namespace Facturation.Server.Models
 
             return cnct.Query<Facture>(sql);
         }
+
+        public IEnumerable<Facture> GetFactures(string orderBy, string asc)
+        {
+            string sql = string.Format("select * from Factures f order by {0} {1}", orderBy, asc);
+            return cnct.Query<Facture>(sql);
+        }
     }
 }
 

@@ -14,5 +14,6 @@ namespace Facturation.Shared
         void Add(Facture facture);
 
         IEnumerable<Facture> GetFactures(DateTime? debut, DateTime? fin);
+        IEnumerable<Facture> GetFactures(string orderBy, string asc);
     }
 }

@@ -57,3 +57,8 @@ C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\De
 C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\Debug\net5.0\ref\Facturation.Server.dll
 C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\Debug\net5.0\Facturation.Server.pdb
 C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\Debug\net5.0\Facturation.Server.genruntimeconfig.cache
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\Debug\net5.0\Facturation.Server.RazorComponent.input.cache
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\Debug\net5.0\Facturation.Server.RazorComponent.output.cache
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\Debug\net5.0\RazorDeclaration\Facturation.Server.dll
+C:\Users\sandd\source\repos\Factu_Atelier4\Facturation\Facturation\Server\obj\Debug\net5.0\Razor\_Imports.razor.g.cs

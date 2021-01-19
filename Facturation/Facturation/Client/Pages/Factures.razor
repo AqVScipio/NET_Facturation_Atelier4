@@ -1,6 +1,9 @@
 ﻿@page "/factures"
 @using Facturation.Shared
+
 @inject HttpClient Http
+@inject FactureRef fRef
+@inject NavigationManager nav
 
 <h1>Factures</h1>
 
@@ -13,21 +16,33 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Numero</th>
-                <th>Client</th>
-                <th>Montant</th>
+                <th style="cursor:pointer;" @onclick="(() => SortBy(E_FactureSortBy.DateReglement))">Echéance</th>
+                <th style="cursor:pointer;" @onclick="(() => SortBy(E_FactureSortBy.Numero))">Numero</th>
+                <th style="cursor:pointer;" @onclick="(() => SortBy(E_FactureSortBy.Client))">Client</th>
+                <th style="cursor:pointer;" @onclick="(() => SortBy(E_FactureSortBy.Montant))">Montant</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var f in factures)
             {
-                <tr>
+            <tr>
+                @if (Facture.NbDaysRemaining(f.DateReglement) <= Facture.DEADLINE_ALERT)
+                {
+                    <td style="color:red;">@f.DateReglement.ToShortDateString()</td>
+                }
+                else if (Facture.NbDaysRemaining(f.DateReglement) <= Facture.DEADLINE_WARNING)
+                {
+                    <td style="color:orange;">@f.DateReglement.ToShortDateString()</td>
+                }
+                else
+                {
                     <td>@f.DateReglement.ToShortDateString()</td>
-                    <td>@f.Numero</td>
-                    <td>@f.Client</td>
-                    <td>@f.Montant</td>
-                </tr>
+                }
+                <td>@f.Numero</td>
+                <td>@f.Client</td>
+                <td>@f.MontantRegle / @f.Montant € (@(f.Montant - f.MontantRegle) € restant dû)</td>
+                <td @onclick="(() => InspectFacture(f.Numero))"><button>Detail</button></td>
+            </tr>
             }
         </tbody>
     </table>
@@ -41,4 +56,27 @@ else
         factures = await Http.GetFromJsonAsync<Facture[]>("api/factures");
     }
 
+    private int NbDaysRemaining(DateTime date)
+    {
+        return (int)Math.Truncate((date - DateTime.Now).TotalDays);
+    }
+
+    private void InspectFacture(string reference)
+    {
+        fRef.FReference = reference;
+        nav.NavigateTo("facture");
+    }
+
+    private string previousElement = E_FactureSortBy.DateReglement;
+    private string orderBy = E_FactureSortBy.ASC;
+    private async Task SortBy(string element)
+    {
+        if(element == previousElement)
+            orderBy = orderBy == E_FactureSortBy.ASC ? E_FactureSortBy.DESC : E_FactureSortBy.ASC;
+        else
+            orderBy = E_FactureSortBy.ASC;
+        factures = await Http.GetFromJsonAsync<Facture[]>($"api/factures/{element}/{orderBy}");
+        StateHasChanged();
+        previousElement = element;
+    }
 }

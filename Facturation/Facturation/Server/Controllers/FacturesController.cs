@@ -1,6 +1,7 @@
 ﻿using Facturation.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,7 +38,16 @@ namespace Facturation.Server.Controllers
                 return facture;
             }
         }
-         
+
+        [HttpGet("{element}/{asc}")]
+        public ActionResult<IEnumerable<Facture>> Get(string element, string asc)
+        {
+            if(element.MatchesFactureElement() && asc.MatchesSortOrder())
+                return Ok(_data.GetFactures(element, asc));
+            else
+                return NotFound("Les entrées ne sont pas correctes.");
+        }
+
         [HttpPost]
         public ActionResult<Facture> CreateFacture([FromBody] Facture nouvelleFacture)
         {

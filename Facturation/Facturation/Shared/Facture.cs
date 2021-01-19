@@ -9,6 +9,9 @@ namespace Facturation.Shared
 {
     public class Facture
     {
+        public static int DEADLINE_WARNING = 14;
+        public static int DEADLINE_ALERT = 2;
+
         [Required]
         [StringLength(15, MinimumLength =10)]
         public string Numero { get; set; }
@@ -25,5 +28,10 @@ namespace Facturation.Shared
         [Required]
         [Range(0.1, double.MaxValue)]
         public decimal MontantRegle { get; set; }
+
+        public static int NbDaysRemaining(DateTime date)
+        {
+            return (int)Math.Truncate((date - DateTime.Now).TotalDays);
+        }
     }
 }
