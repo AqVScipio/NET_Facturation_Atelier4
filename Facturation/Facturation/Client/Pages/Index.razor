@@ -52,7 +52,7 @@ else
 
     private async Task HandleSubmit()
     {
-        //var response = await Http.PostAsJsonAsync("api/dashboard", research);
+        var response = await Http.PostAsJsonAsync("api/dashboard", research);
         //dashboard = response.Content.ReadFromJsonAsync<DashboardDto>().Result;
         //StateHasChanged();
     }
